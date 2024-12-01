@@ -28,36 +28,36 @@ static AudioChannelLayout * CreateChannelLayout(UInt32 numberChannelDescriptions
 
 static AudioChannelLabel ChannelLabelForString(NSString *s)
 {
-	static NSDictionary *labels;
+	static NSDictionary *labels = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		labels = [NSMutableDictionary dictionary];
+		labels = @{
+			@"l"	: @(kAudioChannelLabel_Left),
+			@"r"	: @(kAudioChannelLabel_Right),
+			@"c"	: @(kAudioChannelLabel_Center),
+			@"lfe"	: @(kAudioChannelLabel_LFEScreen),
+			@"ls"	: @(kAudioChannelLabel_LeftSurround),
+			@"rs"	: @(kAudioChannelLabel_RightSurround),
+			@"lc"	: @(kAudioChannelLabel_LeftCenter),
+			@"rc"	: @(kAudioChannelLabel_RightCenter),
+			@"cs"	: @(kAudioChannelLabel_CenterSurround),
+			@"lsd"	: @(kAudioChannelLabel_LeftSurroundDirect),
+			@"rsd"	: @(kAudioChannelLabel_RightSurroundDirect),
+			@"tcs"	: @(kAudioChannelLabel_TopCenterSurround),
+			@"vhl"	: @(kAudioChannelLabel_VerticalHeightLeft),
+			@"vhc"	: @(kAudioChannelLabel_VerticalHeightCenter),
+			@"vhr"	: @(kAudioChannelLabel_VerticalHeightRight),
 
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_Left) 					forKey:@"l"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_Right) 					forKey:@"r"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_Center) 					forKey:@"c"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_LFEScreen) 				forKey:@"lfe"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_LeftSurround) 			forKey:@"ls"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RightSurround) 			forKey:@"rs"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_LeftCenter) 				forKey:@"lc"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RightCenter) 				forKey:@"rc"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_CenterSurround) 			forKey:@"cs"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_LeftSurroundDirect) 		forKey:@"lsd"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RightSurroundDirect) 		forKey:@"rsd"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_TopCenterSurround) 		forKey:@"tcs"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_VerticalHeightLeft) 		forKey:@"vhl"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_VerticalHeightCenter) 	forKey:@"vhc"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_VerticalHeightRight) 		forKey:@"vhr"];
+			@"tbl"	: @(kAudioChannelLabel_TopBackLeft),
+			@"tbc"	: @(kAudioChannelLabel_TopBackCenter),
+			@"tbr"	: @(kAudioChannelLabel_TopBackRight),
 
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_TopBackLeft) 				forKey:@"tbl"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_TopBackCenter) 			forKey:@"tbc"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_TopBackRight) 			forKey:@"tbr"];
+			@"rls"	: @(kAudioChannelLabel_RearSurroundLeft),
+			@"rrs"	: @(kAudioChannelLabel_RearSurroundRight),
 
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RearSurroundLeft) 		forKey:@"rls"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RearSurroundRight) 		forKey:@"rrs"];
-
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_LeftWide) 				forKey:@"lw"];
-		[(NSMutableDictionary *)labels setObject:@(kAudioChannelLabel_RightWide) 				forKey:@"rw"];
+			@"lw"	: @(kAudioChannelLabel_LeftWide),
+			@"rw"	: @(kAudioChannelLabel_RightWide),
+		};
 	});
 
 	NSNumber *label = [labels objectForKey:s];
