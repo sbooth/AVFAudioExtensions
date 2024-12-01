@@ -1,8 +1,11 @@
 //
-// Copyright © 2013-2023 Stephen F. Booth <me@sbooth.org>
+// Copyright © 2013-2024 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/AVFAudioExtensions
 // MIT license
 //
+
+#import <stdlib.h>
+#import <string.h>
 
 #import "AVAudioChannelLayout+SFBChannelLabels.h"
 
