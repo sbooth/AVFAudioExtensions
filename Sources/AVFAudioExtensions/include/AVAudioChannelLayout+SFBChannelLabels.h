@@ -35,25 +35,32 @@ NS_ASSUME_NONNULL_BEGIN
 /// - note: The string comparisons are case-insensitive
 ///
 /// The following channel label strings are recognized:
-/// L `kAudioChannelLabel_Left`
-/// R `kAudioChannelLabel_Right`
-/// C `kAudioChannelLabel_Center`
-/// LFE `kAudioChannelLabel_LFEScreen`
-/// Ls `kAudioChannelLabel_LeftSurround`
-/// Rs `kAudioChannelLabel_RightSurround`
-/// Lc `kAudioChannelLabel_LeftCenter`
-/// Rc `kAudioChannelLabel_RightCenter`
-/// Cs `kAudioChannelLabel_CenterSurround`
-/// Lsd `kAudioChannelLabel_LeftSurroundDirect`
-/// Rsd `kAudioChannelLabel_RightSurroundDirect`
-/// Tcs `kAudioChannelLabel_TopCenterSurround`
-/// Vhl `kAudioChannelLabel_VerticalHeightLeft`
-/// Vhc `kAudioChannelLabel_VerticalHeightCenter`
-/// Vhl `kAudioChannelLabel_VerticalHeightRight`
-/// RLs `kAudioChannelLabel_RearSurroundLeft`
-/// RRs `kAudioChannelLabel_RearSurroundRight`
-/// Lw `kAudioChannelLabel_LeftWide`
-/// Rw `kAudioChannelLabel_RightWide`
+///
+///String | Meaning
+/// --- | ---
+/// L | `kAudioChannelLabel_Left`
+/// R | `kAudioChannelLabel_Right`
+/// C | `kAudioChannelLabel_Center`
+/// LFE | `kAudioChannelLabel_LFEScreen`
+/// Ls | `kAudioChannelLabel_LeftSurround`
+/// Rs | `kAudioChannelLabel_RightSurround`
+/// Lc | `kAudioChannelLabel_LeftCenter`
+/// Rc | `kAudioChannelLabel_RightCenter`
+/// Cs | `kAudioChannelLabel_CenterSurround`
+/// Lsd | `kAudioChannelLabel_LeftSurroundDirect`
+/// Rsd | `kAudioChannelLabel_RightSurroundDirect`
+/// Tcs | `kAudioChannelLabel_TopCenterSurround`
+/// Vhl | `kAudioChannelLabel_VerticalHeightLeft`
+/// Vhc | `kAudioChannelLabel_VerticalHeightCenter`
+/// Vhr | `kAudioChannelLabel_VerticalHeightRight`
+/// Tbl | `kAudioChannelLabel_TopBackLeft`
+/// Tbc | `kAudioChannelLabel_TopBackCenter`
+/// Tbr | `kAudioChannelLabel_TopBackRight`
+/// RLs | `kAudioChannelLabel_RearSurroundLeft`
+/// RRs | `kAudioChannelLabel_RearSurroundRight`
+/// Lw | `kAudioChannelLabel_LeftWide`
+/// Rw | `kAudioChannelLabel_RightWide`
+///
 /// All other strings are mapped to `kAudioChannelLabel_Unknown`
 /// - parameter channelLabelString: A string containing the channel labels
 - (nullable instancetype)initWithChannelLabelString:(NSString *)channelLabelString NS_SWIFT_NAME(init(channelLabelString:));
