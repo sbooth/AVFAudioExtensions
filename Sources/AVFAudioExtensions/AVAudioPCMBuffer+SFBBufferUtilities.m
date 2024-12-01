@@ -1,8 +1,10 @@
 //
-// Copyright © 2020-2023 Stephen F. Booth <me@sbooth.org>
+// Copyright © 2020-2024 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/AVFAudioExtensions
 // MIT license
 //
+
+#import <string.h>
 
 #import "AVAudioPCMBuffer+SFBBufferUtilities.h"
 
