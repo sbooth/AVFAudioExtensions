@@ -21,7 +21,7 @@ final class AVFAudioExtensionsTests: XCTestCase {
 	func testChannelLayoutNames() {
 		let layout = AVAudioChannelLayout(layoutTag: kAudioChannelLayoutTag_Stereo)
 		XCTAssertNotNil(layout)
-		XCTAssertNotNil(layout!.layoutName)
-		XCTAssertNotNil(layout!.layoutSimpleName)
+		XCTAssertGreaterThan(layout!.layoutName.count, 0)
+		XCTAssertGreaterThan(layout!.layoutSimpleName.count, 0)
 	}
 }
