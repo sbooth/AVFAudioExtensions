@@ -24,4 +24,10 @@ final class AVFAudioExtensionsTests: XCTestCase {
 		XCTAssertGreaterThan(layout!.layoutName.count, 0)
 		XCTAssertGreaterThan(layout!.layoutSimpleName.count, 0)
 	}
+
+	func testFormatName() {
+		let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
+		XCTAssertNotNil(format)
+		XCTAssertGreaterThan(format!.formatName.count, 0)
+	}
 }
