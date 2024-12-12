@@ -7,6 +7,8 @@
 #import <AVFAudio/AVFAudio.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface AVAudioFormat (SFBFormatName)
 
 /// Returns the format name.
@@ -14,3 +16,5 @@
 @property (nonatomic, readonly) NSString * formatName;
 
 @end
+
+NS_ASSUME_NONNULL_END
