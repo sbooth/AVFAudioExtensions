@@ -4,21 +4,21 @@
 // MIT license
 //
 
-#import <AudioToolbox/AudioFormat.h>
+@import AudioToolbox.AudioFormat;
 
 #import "AVAudioChannelLayout+SFBLayoutNames.h"
 
 static NSString * GetLayoutName(const AudioChannelLayout *layout, BOOL simpleName)
 {
-	if(!layout)
-		return nil;
+	NSCParameterAssert(layout != NULL);
+
 	AudioFormatPropertyID property = simpleName ? kAudioFormatProperty_ChannelLayoutSimpleName : kAudioFormatProperty_ChannelLayoutName;
 	UInt32 layoutSize = offsetof(AudioChannelLayout, mChannelDescriptions) + (layout->mNumberChannelDescriptions * sizeof(AudioChannelDescription));
 	CFStringRef name = NULL;
 	UInt32 dataSize = sizeof(name);
 	OSStatus result = AudioFormatGetProperty(property, layoutSize, layout, &dataSize, &name);
-	if(result != noErr)
-		return nil;
+	if(result != noErr || name == NULL)
+		return @"";
 	return (__bridge_transfer NSString *)name;
 }
 
