@@ -24,4 +24,10 @@ final class AVFAudioExtensionsTests: XCTestCase {
 		XCTAssertNotNil(layout!.layoutName)
 		XCTAssertNotNil(layout!.layoutSimpleName)
 	}
+
+	func testFormatName() {
+		let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
+		XCTAssertNotNil(format)
+		XCTAssertNotNil(format!.formatName)
+	}
 }
