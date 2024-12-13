@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Functions for getting the channel layout's name
 @interface AVAudioChannelLayout (SFBLayoutNames)
 
-/// Returns the channel layout name.
+/// Returns the channel layout's name.
 /// - note: This is the value returned by `kAudioFormatProperty_ChannelLayoutName`
 @property (nonatomic, readonly) NSString * layoutName;
 
