@@ -11,9 +11,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AVAudioFormat (SFBFormatName)
 
-/// Returns the format name.
+/// Returns the format's name.
 /// - note: This is the value returned by `kAudioFormatProperty_FormatName`
 @property (nonatomic, readonly) NSString * formatName;
+
+/// Returns a detailed description of the format.
+@property (nonatomic, readonly) NSString * formatDetailedDescription;
 
 @end
 
