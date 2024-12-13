@@ -4,8 +4,9 @@
 // MIT license
 //
 
+#import <stdint.h>
+
 @import AudioToolbox.AudioFormat;
-@import stdint_h;
 
 #import "AVAudioFormat+SFBFormatName.h"
 
