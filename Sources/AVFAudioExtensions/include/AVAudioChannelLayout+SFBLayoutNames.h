@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Functions for getting the channel layout's name
+/// Functions for getting channel layout names
 @interface AVAudioChannelLayout (SFBLayoutNames)
 
 /// Returns the name of the channel layout.
