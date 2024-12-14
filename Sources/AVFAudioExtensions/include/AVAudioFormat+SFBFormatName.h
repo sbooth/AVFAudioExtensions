@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Functions for getting audio format names
 @interface AVAudioFormat (SFBFormatName)
 
 /// Returns the name of the audio format.
