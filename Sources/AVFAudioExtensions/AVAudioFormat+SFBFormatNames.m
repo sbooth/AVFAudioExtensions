@@ -8,9 +8,9 @@
 
 @import AudioToolbox.AudioFormat;
 
-#import "AVAudioFormat+SFBFormatName.h"
+#import "AVAudioFormat+SFBFormatNames.h"
 
-@implementation AVAudioFormat (SFBFormatName)
+@implementation AVAudioFormat (SFBFormatNames)
 
 - (NSString *)formatName
 {
