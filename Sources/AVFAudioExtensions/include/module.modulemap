@@ -3,7 +3,7 @@ module AVFAudioExtensions {
 
 	header "AVAudioChannelLayout+SFBChannelLabels.h"
 	header "AVAudioChannelLayout+SFBLayoutNames.h"
-	header "AVAudioFormat+SFBFormatName.h"
+	header "AVAudioFormat+SFBFormatNames.h"
 	header "AVAudioFormat+SFBFormatTransformation.h"
 	header "AVAudioPCMBuffer+SFBBufferUtilities.h"
 
