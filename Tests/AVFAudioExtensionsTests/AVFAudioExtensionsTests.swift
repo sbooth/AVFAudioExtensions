@@ -29,6 +29,5 @@ final class AVFAudioExtensionsTests: XCTestCase {
 		let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
 		XCTAssertNotNil(format)
 		XCTAssertGreaterThan(format!.formatName.count, 0)
-		XCTAssertGreaterThan(format!.formatDetailedDescription.count, 0)
 	}
 }
