@@ -109,28 +109,11 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	NSParameterAssert(count > 0);
 	NSParameterAssert(ap != NULL);
 
-	AudioChannelLayout *channelLayout = CreateChannelLayout(count);
-	if(!channelLayout)
-		return nil;
-
-	channelLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
-	channelLayout->mNumberChannelDescriptions = count;
-
+	AudioChannelLabel channelLabels [count];
 	for(AVAudioChannelCount i = 0; i < count; ++i)
-		channelLayout->mChannelDescriptions[i].mChannelLabel = va_arg(ap, AudioChannelLabel);
+		channelLabels[i] = va_arg(ap, AudioChannelLabel);
 
-	// Attempt to convert the channel labels to a layout tag
-	AudioChannelLayoutTag tag;
-	UInt32 dataSize = sizeof(tag);
-	OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout, (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
-	if(result == noErr)
-		self = [self initWithLayoutTag:tag];
-	else
-		self = [self initWithLayout:channelLayout];
-
-	free(channelLayout);
-
-	return self;
+	return [self initWithChannelLabels:channelLabels count:count];
 }
 
 - (instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
@@ -166,31 +149,14 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 {
 	NSParameterAssert(channelLabelString != nil);
 
-	NSArray *channelLabels = [[channelLabelString lowercaseString] componentsSeparatedByString:@" "];
+	NSArray *channelLabelArray = [[channelLabelString lowercaseString] componentsSeparatedByString:@" "];
 
-	AVAudioChannelCount count = (AVAudioChannelCount)channelLabels.count;
-	AudioChannelLayout *channelLayout = CreateChannelLayout(count);
-	if(!channelLayout)
-		return nil;
+	NSUInteger count = channelLabelArray.count;
+	AudioChannelLabel channelLabels [count];
+	for(NSUInteger i = 0; i < count; ++i)
+		channelLabels[i] = ChannelLabelForString([channelLabelArray objectAtIndex:i]);
 
-	channelLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
-	channelLayout->mNumberChannelDescriptions = count;
-
-	for(AVAudioChannelCount i = 0; i < count; ++i)
-		channelLayout->mChannelDescriptions[i].mChannelLabel = ChannelLabelForString([channelLabels objectAtIndex:i]);
-
-	// Attempt to convert the channel labels to a layout tag
-	AudioChannelLayoutTag tag;
-	UInt32 dataSize = sizeof(tag);
-	OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout, (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
-	if(result == noErr)
-		self = [self initWithLayoutTag:tag];
-	else
-		self = [self initWithLayout:channelLayout];
-
-	free(channelLayout);
-
-	return self;
+	return [self initWithChannelLabels:channelLabels count:(AVAudioChannelCount)count];
 }
 
 @end
