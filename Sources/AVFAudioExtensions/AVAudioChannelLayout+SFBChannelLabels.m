@@ -70,7 +70,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 
 @implementation AVAudioChannelLayout (SFBChannelLabels)
 
-+ (instancetype)layoutWithChannelLabels:(AVAudioChannelCount)count, ...
++ (nullable instancetype)layoutWithChannelLabels:(AVAudioChannelCount)count, ...
 {
 	va_list ap;
 	va_start(ap, count);
@@ -82,7 +82,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	return layout;
 }
 
-+ (instancetype)layoutWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
++ (nullable instancetype)layoutWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
 {
 	return [[AVAudioChannelLayout alloc] initWithChannelLabels:channelLabels count:count];
 }
@@ -92,7 +92,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	return [[AVAudioChannelLayout alloc] initWithChannelLabelString:channelLabelString];
 }
 
-- (instancetype)initWithChannelLabels:(AVAudioChannelCount)count, ...
+- (nullable instancetype)initWithChannelLabels:(AVAudioChannelCount)count, ...
 {
 	va_list ap;
 	va_start(ap, count);
@@ -104,7 +104,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	return self;
 }
 
-- (instancetype)initWithChannelLabels:(AVAudioChannelCount)count ap:(va_list)ap
+- (nullable instancetype)initWithChannelLabels:(AVAudioChannelCount)count ap:(va_list)ap
 {
 	NSParameterAssert(count > 0);
 	NSParameterAssert(ap != NULL);
@@ -121,7 +121,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	return self;
 }
 
-- (instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
+- (nullable instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
 {
 	NSParameterAssert(channelLabels != NULL);
 	NSParameterAssert(count > 0);
@@ -150,7 +150,7 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	return self;
 }
 
-- (instancetype)initWithChannelLabelString:(NSString *)channelLabelString
+- (nullable instancetype)initWithChannelLabelString:(NSString *)channelLabelString
 {
 	NSParameterAssert(channelLabelString != nil);
 
