@@ -19,7 +19,7 @@ static size_t GetChannelLayoutSize(UInt32 numberChannelDescriptions)
 static AudioChannelLayout * CreateChannelLayout(UInt32 numberChannelDescriptions)
 {
 	size_t layoutSize = GetChannelLayoutSize(numberChannelDescriptions);
-	AudioChannelLayout *channelLayout = (AudioChannelLayout *)malloc(layoutSize);
+	AudioChannelLayout *channelLayout = malloc(layoutSize);
 	if(!channelLayout)
 		return NULL;
 
@@ -109,11 +109,16 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	NSParameterAssert(count > 0);
 	NSParameterAssert(ap != NULL);
 
-	AudioChannelLabel channelLabels [count];
+	AudioChannelLabel *channelLabels = malloc(sizeof(AudioChannelLabel) * count);
+	if(!channelLabels)
+		return nil;
+
 	for(AVAudioChannelCount i = 0; i < count; ++i)
 		channelLabels[i] = va_arg(ap, AudioChannelLabel);
 
-	return [self initWithChannelLabels:channelLabels count:count];
+	self = [self initWithChannelLabels:channelLabels count:count];
+	free(channelLabels);
+	return self;
 }
 
 - (instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count
@@ -152,11 +157,17 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	NSArray *channelLabelArray = [[channelLabelString lowercaseString] componentsSeparatedByString:@" "];
 
 	NSUInteger count = channelLabelArray.count;
-	AudioChannelLabel channelLabels [count];
+
+	AudioChannelLabel *channelLabels = malloc(sizeof(AudioChannelLabel) * count);
+	if(!channelLabels)
+		return nil;
+
 	for(NSUInteger i = 0; i < count; ++i)
 		channelLabels[i] = ChannelLabelForString([channelLabelArray objectAtIndex:i]);
 
-	return [self initWithChannelLabels:channelLabels count:(AVAudioChannelCount)count];
+	self = [self initWithChannelLabels:channelLabels count:(AVAudioChannelCount)count];
+	free(channelLabels);
+	return self;
 }
 
 @end
