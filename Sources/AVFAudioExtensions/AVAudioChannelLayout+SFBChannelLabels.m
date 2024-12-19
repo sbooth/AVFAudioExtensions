@@ -7,6 +7,8 @@
 #import <stdlib.h>
 #import <string.h>
 
+@import AudioToolbox.AudioFormat;
+
 #import "AVAudioChannelLayout+SFBChannelLabels.h"
 
 static size_t GetChannelLayoutSize(UInt32 numberChannelDescriptions)
@@ -117,8 +119,17 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	for(AVAudioChannelCount i = 0; i < count; ++i)
 		channelLayout->mChannelDescriptions[i].mChannelLabel = va_arg(ap, AudioChannelLabel);
 
-	self = [self initWithLayout:channelLayout];
+	// Attempt to convert the channel labels to a layout tag
+	AudioChannelLayoutTag tag;
+	UInt32 dataSize = sizeof(tag);
+	OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout, (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
+	if(result == noErr)
+		self = [self initWithLayoutTag:tag];
+	else
+		self = [self initWithLayout:channelLayout];
+
 	free(channelLayout);
+
 	return self;
 }
 
@@ -137,8 +148,17 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	for(AVAudioChannelCount i = 0; i < count; ++i)
 		channelLayout->mChannelDescriptions[i].mChannelLabel = channelLabels[i];
 
-	self = [self initWithLayout:channelLayout];
+	// Attempt to convert the channel labels to a layout tag
+	AudioChannelLayoutTag tag;
+	UInt32 dataSize = sizeof(tag);
+	OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout, (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
+	if(result == noErr)
+		self = [self initWithLayoutTag:tag];
+	else
+		self = [self initWithLayout:channelLayout];
+
 	free(channelLayout);
+
 	return self;
 }
 
@@ -159,8 +179,17 @@ static AudioChannelLabel ChannelLabelForString(NSString *s)
 	for(AVAudioChannelCount i = 0; i < count; ++i)
 		channelLayout->mChannelDescriptions[i].mChannelLabel = ChannelLabelForString([channelLabels objectAtIndex:i]);
 
-	self = [self initWithLayout:channelLayout];
+	// Attempt to convert the channel labels to a layout tag
+	AudioChannelLayoutTag tag;
+	UInt32 dataSize = sizeof(tag);
+	OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout, (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
+	if(result == noErr)
+		self = [self initWithLayoutTag:tag];
+	else
+		self = [self initWithLayout:channelLayout];
+
 	free(channelLayout);
+
 	return self;
 }
 
