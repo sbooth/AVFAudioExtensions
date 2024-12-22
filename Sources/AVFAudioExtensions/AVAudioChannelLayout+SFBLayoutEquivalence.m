@@ -12,8 +12,10 @@
 
 - (BOOL)isEquivalentToLayout:(AVAudioChannelLayout *)channelLayout
 {
-	if(!channelLayout)
-		return self.channelCount <= 2;
+	if(!channelLayout) {
+		AudioChannelLayoutTag layoutTag = self.layoutTag;
+		return layoutTag == kAudioChannelLayoutTag_Mono || layoutTag == kAudioChannelLayoutTag_Stereo;
+	}
 
 	const AudioChannelLayout *layouts [] = {
 		self.layout,
