@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Channel layouts are considered equivalent if:
 /// 1) `channelLayout` is `nil` and `self` has a mono or stereo layout tag
 /// 2) `kAudioFormatProperty_AreChannelLayoutsEquivalent` is true
-/// - parameter channelLayout:
+/// - parameter channelLayout: An `AVAudioChannelLayout` object to compare to `self`
 /// - returns: `YES` if `self` and `channelLayout` are equivalent
 - (BOOL)isEquivalentToLayout:(nullable AVAudioChannelLayout *)channelLayout;
 
