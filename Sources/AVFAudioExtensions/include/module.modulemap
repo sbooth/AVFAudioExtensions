@@ -2,6 +2,7 @@ module AVFAudioExtensions {
 	requires objc
 
 	header "AVAudioChannelLayout+SFBChannelLabels.h"
+	header "AVAudioChannelLayout+SFBLayoutEquivalence.h"
 	header "AVAudioChannelLayout+SFBLayoutNames.h"
 	header "AVAudioFormat+SFBFormatName.h"
 	header "AVAudioFormat+SFBFormatTransformation.h"
