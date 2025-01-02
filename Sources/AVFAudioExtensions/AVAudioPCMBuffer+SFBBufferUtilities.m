@@ -1,9 +1,10 @@
 //
-// Copyright © 2020-2024 Stephen F. Booth <me@sbooth.org>
+// Copyright © 2020-2025 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/AVFAudioExtensions
 // MIT license
 //
 
+#import <stdint.h>
 #import <string.h>
 
 #import "AVAudioPCMBuffer+SFBBufferUtilities.h"
@@ -66,19 +67,17 @@
 	AVAudioFrameCount framesToMove = self.frameLength - writeOffset;
 	if(framesToMove) {
 		AVAudioFrameCount moveToOffset = writeOffset + framesToInsert;
-		for(UInt32 i = 0; i < dst_abl->mNumberBuffers; ++i) {
-			const unsigned char *srcbuf = (const unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame);
-			unsigned char *dstbuf = (unsigned char *)dst_abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame);
-			memmove(dstbuf, srcbuf, framesToMove * asbd->mBytesPerFrame);
-		}
+		for(UInt32 i = 0; i < dst_abl->mNumberBuffers; ++i)
+			memmove((void *)((uintptr_t)dst_abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame)),
+					(const void *)((uintptr_t)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame)),
+					framesToMove * asbd->mBytesPerFrame);
 	}
 
 	if(framesToInsert) {
-		for(UInt32 i = 0; i < src_abl->mNumberBuffers; ++i) {
-			const unsigned char *srcbuf = (const unsigned char *)src_abl->mBuffers[i].mData + (readOffset * asbd->mBytesPerFrame);
-			unsigned char *dstbuf = (unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame);
-			memcpy(dstbuf, srcbuf, framesToInsert * asbd->mBytesPerFrame);
-		}
+		for(UInt32 i = 0; i < src_abl->mNumberBuffers; ++i)
+			memcpy((void *)((uintptr_t)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame)),
+				   (const void *)((uintptr_t)src_abl->mBuffers[i].mData + (readOffset * asbd->mBytesPerFrame)),
+				   framesToInsert * asbd->mBytesPerFrame);
 
 		self.frameLength += framesToInsert;
 	}
@@ -111,11 +110,10 @@
 	AVAudioFrameCount framesToMove = self.frameLength - (offset + framesToTrim);
 	if(framesToMove) {
 		AVAudioFrameCount moveFromOffset = offset + framesToTrim;
-		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
-			const unsigned char *srcbuf = (const unsigned char *)abl->mBuffers[i].mData + (moveFromOffset * asbd->mBytesPerFrame);
-			unsigned char *dstbuf = (unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame);
-			memmove(dstbuf, srcbuf, framesToMove * asbd->mBytesPerFrame);
-		}
+		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+			memmove((void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)),
+					(const void *)((uintptr_t)abl->mBuffers[i].mData + (moveFromOffset * asbd->mBytesPerFrame)),
+					framesToMove * asbd->mBytesPerFrame);
 	}
 
 	self.frameLength -= framesToTrim;
@@ -148,18 +146,17 @@
 	AVAudioFrameCount framesToMove = self.frameLength - offset;
 	if(framesToMove) {
 		AVAudioFrameCount moveToOffset = offset + framesToZero;
-		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
-			const unsigned char *srcbuf = (const unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame);
-			unsigned char *dstbuf = (unsigned char *)abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame);
-			memmove(dstbuf, srcbuf, framesToMove * asbd->mBytesPerFrame);
-		}
+		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+			memmove((void *)((uintptr_t)abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame)),
+					(const void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)),
+					framesToMove * asbd->mBytesPerFrame);
 	}
 
 	if(framesToZero) {
-		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
-			unsigned char *dstbuf = (uint8_t *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame);
-			memset(dstbuf, 0, framesToZero * asbd->mBytesPerFrame);
-		}
+		for(UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+			memset((void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)),
+				   0,
+				   framesToZero * asbd->mBytesPerFrame);
 
 		self.frameLength += framesToZero;
 	}
