@@ -1,6 +1,6 @@
 // swift-tools-version: 5.6
 //
-// SPDX-FileCopyrightText: 2025 Stephen F. Booth <contact@sbooth.dev>
+// SPDX-FileCopyrightText: 2024 Stephen F. Booth <contact@sbooth.dev>
 // SPDX-License-Identifier: MIT
 //
 // Part of https://github.com/sbooth/AVFAudioExtensions
