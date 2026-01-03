@@ -1,7 +1,8 @@
 //
-// Copyright © 2013-2024 Stephen F. Booth <me@sbooth.org>
+// SPDX-FileCopyrightText: 2013 Stephen F. Booth <contact@sbooth.dev>
+// SPDX-License-Identifier: MIT
+//
 // Part of https://github.com/sbooth/AVFAudioExtensions
-// MIT license
 //
 
 #import <stdlib.h>
