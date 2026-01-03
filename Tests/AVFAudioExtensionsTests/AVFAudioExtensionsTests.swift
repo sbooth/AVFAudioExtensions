@@ -1,3 +1,10 @@
+//
+// SPDX-FileCopyrightText: 2021 Stephen F. Booth <contact@sbooth.dev>
+// SPDX-License-Identifier: MIT
+//
+// Part of https://github.com/sbooth/AVFAudioExtensions
+//
+
 import XCTest
 import AVFAudio
 @testable import AVFAudioExtensions
