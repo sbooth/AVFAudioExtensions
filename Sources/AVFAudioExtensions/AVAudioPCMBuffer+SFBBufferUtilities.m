@@ -180,8 +180,8 @@
     const AudioStreamBasicDescription *asbd = self.format.streamDescription;
     const AudioBufferList *abl = self.audioBufferList;
 
-    // Floating point
     if (asbd->mFormatFlags & kAudioFormatFlagIsFloat) {
+        // Floating point
         NSAssert(asbd->mBitsPerChannel == 32 || asbd->mBitsPerChannel == 64,
                  @"Unsupported mBitsPerChannel %d for kAudioFormatFlagIsFloat", asbd->mBitsPerChannel);
         if (asbd->mBitsPerChannel == 32) {
@@ -193,7 +193,8 @@
                 }
             }
             return YES;
-        } else if (asbd->mBitsPerChannel == 64) {
+        }
+        if (asbd->mBitsPerChannel == 64) {
             for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
                 const double *buf = (const double *)abl->mBuffers[i].mData;
                 for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(double); ++sampleNumber) {
@@ -203,9 +204,8 @@
             }
             return YES;
         }
-    }
-    // Integer
-    else {
+    } else {
+        // Integer
         const UInt32 interleavedChannelCount =
               asbd->mFormatFlags & kAudioFormatFlagIsNonInterleaved ? 1 : asbd->mChannelsPerFrame;
         const UInt32 bytesPerSample = asbd->mBytesPerFrame / interleavedChannelCount;
@@ -292,9 +292,8 @@
                 return YES;
             }
             }
-        }
-        // Integer, unpacked
-        else {
+        } else {
+            // Integer, unpacked
             const size_t shift = (bytesPerSample * 8) - asbd->mBitsPerChannel;
             switch (bytesPerSample) {
             case 1: {
