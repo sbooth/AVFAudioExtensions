@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Returns the name of the audio format.
 /// - note: This is the value returned by `kAudioFormatProperty_FormatName`
-@property (nonatomic, readonly) NSString * formatName;
+@property(nonatomic, readonly) NSString *formatName;
 
 @end
 
