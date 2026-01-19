@@ -9,7 +9,7 @@
 
 @import AudioToolbox.AudioFormat;
 
-@import stdint_h;
+#import <stdint.h>
 
 @implementation AVAudioFormat (SFBFormatName)
 

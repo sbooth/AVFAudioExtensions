@@ -9,8 +9,8 @@
 
 @import AudioToolbox.AudioFormat;
 
-@import stdlib_h;
-@import string_h;
+#import <stdlib.h>
+#import <string.h>
 
 static size_t GetChannelLayoutSize(UInt32 numberChannelDescriptions)
 {
