@@ -1,7 +1,8 @@
 //
-// Copyright © 2024 Stephen F. Booth <me@sbooth.org>
+// SPDX-FileCopyrightText: 2024 Stephen F. Booth <contact@sbooth.dev>
+// SPDX-License-Identifier: MIT
+//
 // Part of https://github.com/sbooth/AVFAudioExtensions
-// MIT license
 //
 
 #import <AVFAudio/AVFAudio.h>
@@ -14,11 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Returns the name of the channel layout.
 /// - note: This is the value returned by `kAudioFormatProperty_ChannelLayoutName`
-@property (nonatomic, readonly) NSString * layoutName;
+@property(nonatomic, readonly) NSString *layoutName;
 
 /// Returns the name of the channel layout without channel labels.
 /// - note: This is the value returned by `kAudioFormatProperty_ChannelLayoutSimpleName`
-@property (nonatomic, readonly) NSString * layoutSimpleName;
+@property(nonatomic, readonly) NSString *layoutSimpleName;
 
 @end
 
