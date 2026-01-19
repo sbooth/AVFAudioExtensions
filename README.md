@@ -20,9 +20,9 @@ Add a package dependency to https://github.com/sbooth/AVFAudioExtensions in Xcod
 
 | Extended Class | Description |
 | --- | --- |
-| [AVAudioChannelLayout](Sources/AVFAudioExtensions/include/AVAudioChannelLayout+SFBChannelLabels.h) | Functions for building channel layouts from channel labels |
-| [AVAudioFormat](Sources/AVFAudioExtensions/include/AVAudioFormat+SFBFormatTransformation.h) | Format transformations |
-| [AVAudioPCMBuffer](Sources/AVFAudioExtensions/include/AVAudioPCMBuffer+SFBBufferUtilities.h) | Functions for buffer manipulation |
+| [AVAudioChannelLayout](Sources/AVFAudioExtensions/include/AVFAudioExtensions/AVAudioChannelLayout+SFBChannelLabels.h) | Functions for building channel layouts from channel labels |
+| [AVAudioFormat](Sources/AVFAudioExtensions/include/AVFAudioExtensions/AVAudioFormat+SFBFormatTransformation.h) | Format transformations |
+| [AVAudioPCMBuffer](Sources/AVFAudioExtensions/include/AVFAudioExtensions/AVAudioPCMBuffer+SFBBufferUtilities.h) | Functions for buffer manipulation |
 
 ## License
 
