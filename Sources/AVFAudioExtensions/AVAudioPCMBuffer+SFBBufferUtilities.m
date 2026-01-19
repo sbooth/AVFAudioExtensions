@@ -215,7 +215,7 @@
                  @"Unsupported sample width %d", bytesPerSample);
 
         // Integer, packed
-        if(asbd->mFormatFlags & kAudioFormatFlagIsPacked /*|| ((asbd->mBitsPerChannel / 8) * asbd->mChannelsPerFrame) == asbd->mBytesPerFrame*/) {
+        if (asbd->mFormatFlags & kAudioFormatFlagIsPacked) {
             switch (bytesPerSample) {
             case 1: {
                 const uint8_t silence = asbd->mFormatFlags & kAudioFormatFlagIsSignedInteger ? 0 : 0x80;
