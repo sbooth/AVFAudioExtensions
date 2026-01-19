@@ -5,11 +5,11 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-#import <stdint.h>
+#import "AVAudioFormat+SFBFormatName.h"
 
 @import AudioToolbox.AudioFormat;
 
-#import "AVAudioFormat+SFBFormatName.h"
+#import <stdint.h>
 
 @implementation AVAudioFormat (SFBFormatName)
 

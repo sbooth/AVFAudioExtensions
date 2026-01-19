@@ -5,9 +5,9 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-@import AudioToolbox.AudioFormat;
-
 #import "AVAudioChannelLayout+SFBLayoutNames.h"
+
+@import AudioToolbox.AudioFormat;
 
 static NSString * GetLayoutName(const AudioChannelLayout *layout, BOOL simpleName)
 {
