@@ -8,6 +8,7 @@
 #pragma once
 
 #import <AVFAudioExtensions/AVAudioChannelLayout+SFBChannelLabels.h>
+#import <AVFAudioExtensions/AVAudioChannelLayout+SFBLayoutEquivalence.h>
 #import <AVFAudioExtensions/AVAudioChannelLayout+SFBLayoutNames.h>
 #import <AVFAudioExtensions/AVAudioFormat+SFBFormatName.h>
 #import <AVFAudioExtensions/AVAudioFormat+SFBFormatTransformation.h>
