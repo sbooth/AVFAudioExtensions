@@ -44,11 +44,10 @@
 - (nullable AVAudioFormat *)standardEquivalent {
     if (self.isStandard)
         return self;
-    else if (self.channelLayout)
+    if (self.channelLayout)
         return [[AVAudioFormat alloc] initStandardFormatWithSampleRate:self.sampleRate
                                                          channelLayout:self.channelLayout];
-    else
-        return [[AVAudioFormat alloc] initStandardFormatWithSampleRate:self.sampleRate channels:self.channelCount];
+    return [[AVAudioFormat alloc] initStandardFormatWithSampleRate:self.sampleRate channels:self.channelCount];
 }
 
 - (nullable AVAudioFormat *)transformedToCommonFormat:(AVAudioCommonFormat)commonFormat interleaved:(BOOL)interleaved {
@@ -57,11 +56,10 @@
                                                 sampleRate:self.sampleRate
                                                interleaved:interleaved
                                              channelLayout:self.channelLayout];
-    else
-        return [[AVAudioFormat alloc] initWithCommonFormat:commonFormat
-                                                sampleRate:self.sampleRate
-                                                  channels:self.channelCount
-                                               interleaved:interleaved];
+    return [[AVAudioFormat alloc] initWithCommonFormat:commonFormat
+                                            sampleRate:self.sampleRate
+                                              channels:self.channelCount
+                                           interleaved:interleaved];
 }
 
 @end
