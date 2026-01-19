@@ -9,24 +9,27 @@
 import PackageDescription
 
 let package = Package(
-	name: "AVFAudioExtensions",
-	products: [
-		.library(
-			name: "AVFAudioExtensions",
-			targets: [
-				"AVFAudioExtensions",
-			]),
-	],
-	targets: [
-		.target(
-			name: "AVFAudioExtensions",
-			linkerSettings: [
-				.linkedFramework("AVFAudio"),
-			]),
-		.testTarget(
-			name: "AVFAudioExtensionsTests",
-			dependencies: [
-				"AVFAudioExtensions",
-			]),
-	]
+    name: "AVFAudioExtensions",
+    products: [
+        .library(
+            name: "AVFAudioExtensions",
+            targets: [
+                "AVFAudioExtensions",
+            ]),
+    ],
+    targets: [
+        .target(
+            name: "AVFAudioExtensions",
+            cSettings: [
+                .headerSearchPath("include/AVFAudioExtensions"),
+            ],
+            linkerSettings: [
+                .linkedFramework("AVFAudio"),
+            ]),
+        .testTarget(
+            name: "AVFAudioExtensionsTests",
+            dependencies: [
+                "AVFAudioExtensions",
+            ]),
+    ]
 )

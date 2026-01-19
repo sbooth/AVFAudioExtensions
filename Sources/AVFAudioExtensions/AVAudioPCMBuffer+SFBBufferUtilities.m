@@ -5,10 +5,10 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
+#import "AVAudioPCMBuffer+SFBBufferUtilities.h"
+
 #import <stdint.h>
 #import <string.h>
-
-#import "AVAudioPCMBuffer+SFBBufferUtilities.h"
 
 @implementation AVAudioPCMBuffer (SFBBufferUtilities)
 

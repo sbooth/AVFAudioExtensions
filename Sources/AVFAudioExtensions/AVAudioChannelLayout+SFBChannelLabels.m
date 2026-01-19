@@ -5,12 +5,12 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-#import <stdlib.h>
-#import <string.h>
+#import "AVAudioChannelLayout+SFBChannelLabels.h"
 
 @import AudioToolbox.AudioFormat;
 
-#import "AVAudioChannelLayout+SFBChannelLabels.h"
+#import <stdlib.h>
+#import <string.h>
 
 static size_t GetChannelLayoutSize(UInt32 numberChannelDescriptions)
 {
