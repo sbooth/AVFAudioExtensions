@@ -7,7 +7,7 @@
 
 #import "AVAudioChannelLayout+SFBChannelLabels.h"
 
-@import AudioToolbox.AudioFormat;
+#import <AudioToolbox/AudioFormat.h>
 
 #import <stdlib.h>
 #import <string.h>

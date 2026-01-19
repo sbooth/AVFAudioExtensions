@@ -7,7 +7,7 @@
 
 #import "AVAudioChannelLayout+SFBLayoutNames.h"
 
-@import AudioToolbox.AudioFormat;
+#import <AudioToolbox/AudioFormat.h>
 
 static NSString *GetLayoutName(const AudioChannelLayout *layout, BOOL simpleName) {
     NSCParameterAssert(layout != NULL);

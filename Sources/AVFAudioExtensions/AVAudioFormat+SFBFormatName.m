@@ -7,7 +7,7 @@
 
 #import "AVAudioFormat+SFBFormatName.h"
 
-@import AudioToolbox.AudioFormat;
+#import <AudioToolbox/AudioFormat.h>
 
 #import <stdint.h>
 
