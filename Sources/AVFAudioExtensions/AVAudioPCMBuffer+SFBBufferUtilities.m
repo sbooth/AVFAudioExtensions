@@ -7,8 +7,8 @@
 
 #import "AVAudioPCMBuffer+SFBBufferUtilities.h"
 
-#import <stdint.h>
-#import <string.h>
+@import stdint_h;
+@import string_h;
 
 @implementation AVAudioPCMBuffer (SFBBufferUtilities)
 
