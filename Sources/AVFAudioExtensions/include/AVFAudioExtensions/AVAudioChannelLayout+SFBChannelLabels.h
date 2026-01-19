@@ -17,8 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns an initialized `AVAudioChannelLayout` object with the specified channel labels or `nil` on failure
 /// - parameter channelLabels: An array of channel labels
 /// - parameter count: The number of channel labels
-+ (nullable instancetype)layoutWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count;
-/// Returns an initialized `AVAudioChannelLayout` object according to the specified channel label string or `nil` on failure
++ (nullable instancetype)layoutWithChannelLabels:(const AudioChannelLabel *)channelLabels
+                                           count:(AVAudioChannelCount)count;
+/// Returns an initialized `AVAudioChannelLayout` object according to the specified channel label string or `nil` on
+/// failure
 /// - parameter channelLabelString: A string containing the channel labels
 + (nullable instancetype)layoutWithChannelLabelString:(NSString *)channelLabelString;
 /// Returns an initialized `AVAudioChannelLayout` object with the specified channel labels or `nil` on failure
@@ -31,13 +33,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns an initialized `AVAudioChannelLayout` object with the specified channel labels or `nil` on failure
 /// - parameter channelLabels: An array of channel labels
 /// - parameter count: The number of channel labels
-- (nullable instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels count:(AVAudioChannelCount)count;
-/// Returns an initialized `AVAudioChannelLayout` object according to the specified channel label string or `nil` on failure
+- (nullable instancetype)initWithChannelLabels:(const AudioChannelLabel *)channelLabels
+                                         count:(AVAudioChannelCount)count;
+/// Returns an initialized `AVAudioChannelLayout` object according to the specified channel label string or `nil` on
+/// failure
 /// - note: The string comparisons are case-insensitive
 ///
 /// The following channel label strings are recognized:
 ///
-///String | Meaning
+/// String | Meaning
 /// --- | ---
 /// L | `kAudioChannelLabel_Left`
 /// R | `kAudioChannelLabel_Right`
@@ -64,7 +68,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// All other strings are mapped to `kAudioChannelLabel_Unknown`
 /// - parameter channelLabelString: A string containing the channel labels
-- (nullable instancetype)initWithChannelLabelString:(NSString *)channelLabelString NS_SWIFT_NAME(init(channelLabelString:));
+- (nullable instancetype)initWithChannelLabelString:(NSString *)channelLabelString
+      NS_SWIFT_NAME(init(channelLabelString:));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,0 +1,19 @@
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+ContinuationIndentWidth: 6
+TabWidth: 4
+UseTab: Never
+
+ColumnLimit: 120
+
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^".*"$'
+    Priority: 1
+  - Regex: '^<(Foundation|AVFAudio)/'
+    Priority: 3
+  - Regex: '^<[^./>]+>$'
+    Priority: 10
+  - Regex: '.*'
+    Priority: 20
