@@ -73,15 +73,15 @@
     if (framesToMove) {
         AVAudioFrameCount moveToOffset = writeOffset + framesToInsert;
         for (UInt32 i = 0; i < dst_abl->mNumberBuffers; ++i)
-            memmove((void *)((uintptr_t)dst_abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame)),
-                    (const void *)((uintptr_t)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame)),
+            memmove((unsigned char *)dst_abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame),
+                    (const unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
     }
 
     if (framesToInsert) {
         for (UInt32 i = 0; i < src_abl->mNumberBuffers; ++i)
-            memcpy((void *)((uintptr_t)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame)),
-                   (const void *)((uintptr_t)src_abl->mBuffers[i].mData + (readOffset * asbd->mBytesPerFrame)),
+            memcpy((unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame),
+                   (const unsigned char *)src_abl->mBuffers[i].mData + (readOffset * asbd->mBytesPerFrame),
                    framesToInsert * asbd->mBytesPerFrame);
 
         self.frameLength += framesToInsert;
@@ -113,8 +113,8 @@
     if (framesToMove) {
         AVAudioFrameCount moveFromOffset = offset + framesToTrim;
         for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
-            memmove((void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)),
-                    (const void *)((uintptr_t)abl->mBuffers[i].mData + (moveFromOffset * asbd->mBytesPerFrame)),
+            memmove((unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame),
+                    (const unsigned char *)abl->mBuffers[i].mData + (moveFromOffset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
     }
 
@@ -149,14 +149,14 @@
     if (framesToMove) {
         AVAudioFrameCount moveToOffset = offset + framesToZero;
         for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
-            memmove((void *)((uintptr_t)abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame)),
-                    (const void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)),
+            memmove((unsigned char *)abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame),
+                    (const unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
     }
 
     if (framesToZero) {
         for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
-            memset((void *)((uintptr_t)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame)), 0,
+            memset((unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame), 0,
                    framesToZero * asbd->mBytesPerFrame);
 
         self.frameLength += framesToZero;
@@ -187,7 +187,8 @@
         if (asbd->mBitsPerChannel == 32) {
             for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
                 const float *buf = (const float *)abl->mBuffers[i].mData;
-                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(float); ++sampleNumber) {
+                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(float);
+                     ++sampleNumber) {
                     if (buf[sampleNumber] != 0)
                         return NO;
                 }
@@ -197,7 +198,8 @@
         if (asbd->mBitsPerChannel == 64) {
             for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
                 const double *buf = (const double *)abl->mBuffers[i].mData;
-                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(double); ++sampleNumber) {
+                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(double);
+                     ++sampleNumber) {
                     if (buf[sampleNumber] != 0)
                         return NO;
                 }
