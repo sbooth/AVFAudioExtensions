@@ -13,7 +13,7 @@ IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^".*"$'
     Priority: 1
-  - Regex: '^<(Foundation|AVFAudio)/'
+  - Regex: '^<(Foundation|AudioToolbox|AVFAudio)/'
     Priority: 3
   - Regex: '^<[^./>]+>$'
     Priority: 10
