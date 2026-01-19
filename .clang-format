@@ -7,6 +7,8 @@ UseTab: Never
 
 ColumnLimit: 120
 
+ObjCBlockIndentWidth: 4
+
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^".*"$'
