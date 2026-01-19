@@ -187,7 +187,7 @@
         if (asbd->mBitsPerChannel == 32) {
             for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
                 const float *buf = (const float *)abl->mBuffers[i].mData;
-                for (UInt32 sampleNumber = 0; i < abl->mBuffers[i].mDataByteSize / sizeof(float); ++sampleNumber) {
+                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(float); ++sampleNumber) {
                     if (buf[sampleNumber] != 0)
                         return NO;
                 }
@@ -196,7 +196,7 @@
         } else if (asbd->mBitsPerChannel == 64) {
             for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
                 const double *buf = (const double *)abl->mBuffers[i].mData;
-                for (UInt32 sampleNumber = 0; i < abl->mBuffers[i].mDataByteSize / sizeof(double); ++sampleNumber) {
+                for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(double); ++sampleNumber) {
                     if (buf[sampleNumber] != 0)
                         return NO;
                 }
