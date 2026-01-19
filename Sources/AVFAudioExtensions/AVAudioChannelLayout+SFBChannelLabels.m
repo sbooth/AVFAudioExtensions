@@ -32,33 +32,33 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     static NSDictionary *labels = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-      labels = @{
-          @"l" : @(kAudioChannelLabel_Left),
-          @"r" : @(kAudioChannelLabel_Right),
-          @"c" : @(kAudioChannelLabel_Center),
-          @"lfe" : @(kAudioChannelLabel_LFEScreen),
-          @"ls" : @(kAudioChannelLabel_LeftSurround),
-          @"rs" : @(kAudioChannelLabel_RightSurround),
-          @"lc" : @(kAudioChannelLabel_LeftCenter),
-          @"rc" : @(kAudioChannelLabel_RightCenter),
-          @"cs" : @(kAudioChannelLabel_CenterSurround),
-          @"lsd" : @(kAudioChannelLabel_LeftSurroundDirect),
-          @"rsd" : @(kAudioChannelLabel_RightSurroundDirect),
-          @"tcs" : @(kAudioChannelLabel_TopCenterSurround),
-          @"vhl" : @(kAudioChannelLabel_VerticalHeightLeft),
-          @"vhc" : @(kAudioChannelLabel_VerticalHeightCenter),
-          @"vhr" : @(kAudioChannelLabel_VerticalHeightRight),
+        labels = @{
+            @"l" : @(kAudioChannelLabel_Left),
+            @"r" : @(kAudioChannelLabel_Right),
+            @"c" : @(kAudioChannelLabel_Center),
+            @"lfe" : @(kAudioChannelLabel_LFEScreen),
+            @"ls" : @(kAudioChannelLabel_LeftSurround),
+            @"rs" : @(kAudioChannelLabel_RightSurround),
+            @"lc" : @(kAudioChannelLabel_LeftCenter),
+            @"rc" : @(kAudioChannelLabel_RightCenter),
+            @"cs" : @(kAudioChannelLabel_CenterSurround),
+            @"lsd" : @(kAudioChannelLabel_LeftSurroundDirect),
+            @"rsd" : @(kAudioChannelLabel_RightSurroundDirect),
+            @"tcs" : @(kAudioChannelLabel_TopCenterSurround),
+            @"vhl" : @(kAudioChannelLabel_VerticalHeightLeft),
+            @"vhc" : @(kAudioChannelLabel_VerticalHeightCenter),
+            @"vhr" : @(kAudioChannelLabel_VerticalHeightRight),
 
-          @"tbl" : @(kAudioChannelLabel_TopBackLeft),
-          @"tbc" : @(kAudioChannelLabel_TopBackCenter),
-          @"tbr" : @(kAudioChannelLabel_TopBackRight),
+            @"tbl" : @(kAudioChannelLabel_TopBackLeft),
+            @"tbc" : @(kAudioChannelLabel_TopBackCenter),
+            @"tbr" : @(kAudioChannelLabel_TopBackRight),
 
-          @"rls" : @(kAudioChannelLabel_RearSurroundLeft),
-          @"rrs" : @(kAudioChannelLabel_RearSurroundRight),
+            @"rls" : @(kAudioChannelLabel_RearSurroundLeft),
+            @"rrs" : @(kAudioChannelLabel_RearSurroundRight),
 
-          @"lw" : @(kAudioChannelLabel_LeftWide),
-          @"rw" : @(kAudioChannelLabel_RightWide),
-      };
+            @"lw" : @(kAudioChannelLabel_LeftWide),
+            @"rw" : @(kAudioChannelLabel_RightWide),
+        };
     });
 
     NSNumber *label = [labels objectForKey:s];
