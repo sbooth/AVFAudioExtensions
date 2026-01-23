@@ -19,8 +19,9 @@ static NSString *GetLayoutName(const AudioChannelLayout *layout, BOOL simpleName
     CFStringRef name = NULL;
     UInt32 dataSize = sizeof(name);
     OSStatus result = AudioFormatGetProperty(property, layoutSize, layout, &dataSize, &name);
-    if (result != noErr || name == NULL)
+    if (result != noErr || name == NULL) {
         return @"";
+    }
     return (__bridge_transfer NSString *)name;
 }
 
