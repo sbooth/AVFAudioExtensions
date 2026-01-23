@@ -11,11 +11,13 @@
 
 - (nullable AVAudioFormat *)nonInterleavedEquivalent {
     AudioStreamBasicDescription asbd = *(self.streamDescription);
-    if (asbd.mFormatID != kAudioFormatLinearPCM || !asbd.mChannelsPerFrame)
+    if (asbd.mFormatID != kAudioFormatLinearPCM || !asbd.mChannelsPerFrame) {
         return nil;
+    }
 
-    if (asbd.mFormatFlags & kAudioFormatFlagIsNonInterleaved)
+    if (asbd.mFormatFlags & kAudioFormatFlagIsNonInterleaved) {
         return self;
+    }
 
     asbd.mFormatFlags |= kAudioFormatFlagIsNonInterleaved;
 
@@ -27,11 +29,13 @@
 
 - (nullable AVAudioFormat *)interleavedEquivalent {
     AudioStreamBasicDescription asbd = *(self.streamDescription);
-    if (asbd.mFormatID != kAudioFormatLinearPCM)
+    if (asbd.mFormatID != kAudioFormatLinearPCM) {
         return nil;
+    }
 
-    if (!(asbd.mFormatFlags & kAudioFormatFlagIsNonInterleaved))
+    if (!(asbd.mFormatFlags & kAudioFormatFlagIsNonInterleaved)) {
         return self;
+    }
 
     asbd.mFormatFlags &= ~kAudioFormatFlagIsNonInterleaved;
 
@@ -42,20 +46,23 @@
 }
 
 - (nullable AVAudioFormat *)standardEquivalent {
-    if (self.isStandard)
+    if (self.isStandard) {
         return self;
-    if (self.channelLayout)
+    }
+    if (self.channelLayout) {
         return [[AVAudioFormat alloc] initStandardFormatWithSampleRate:self.sampleRate
                                                          channelLayout:self.channelLayout];
+    }
     return [[AVAudioFormat alloc] initStandardFormatWithSampleRate:self.sampleRate channels:self.channelCount];
 }
 
 - (nullable AVAudioFormat *)transformedToCommonFormat:(AVAudioCommonFormat)commonFormat interleaved:(BOOL)interleaved {
-    if (self.channelLayout)
+    if (self.channelLayout) {
         return [[AVAudioFormat alloc] initWithCommonFormat:commonFormat
                                                 sampleRate:self.sampleRate
                                                interleaved:interleaved
                                              channelLayout:self.channelLayout];
+    }
     return [[AVAudioFormat alloc] initWithCommonFormat:commonFormat
                                             sampleRate:self.sampleRate
                                               channels:self.channelCount

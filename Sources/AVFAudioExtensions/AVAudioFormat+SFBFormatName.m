@@ -18,8 +18,9 @@
     UInt32 dataSize = sizeof(name);
     OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_FormatName, sizeof(AudioStreamBasicDescription),
                                              self.streamDescription, &dataSize, &name);
-    if (result != noErr || name == NULL)
+    if (result != noErr || name == NULL) {
         return @"";
+    }
     return (__bridge_transfer NSString *)name;
 }
 

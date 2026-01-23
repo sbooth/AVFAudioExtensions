@@ -20,8 +20,9 @@ static size_t GetChannelLayoutSize(UInt32 numberChannelDescriptions) {
 static AudioChannelLayout *CreateChannelLayout(UInt32 numberChannelDescriptions) {
     size_t layoutSize = GetChannelLayoutSize(numberChannelDescriptions);
     AudioChannelLayout *channelLayout = malloc(layoutSize);
-    if (!channelLayout)
+    if (!channelLayout) {
         return NULL;
+    }
 
     memset(channelLayout, 0, layoutSize);
 
@@ -62,8 +63,9 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     });
 
     NSNumber *label = [labels objectForKey:s];
-    if (label != nil)
+    if (label != nil) {
         return (AudioChannelLabel)label.unsignedIntValue;
+    }
     return kAudioChannelLabel_Unknown;
 }
 
@@ -105,11 +107,13 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     NSParameterAssert(ap != NULL);
 
     AudioChannelLabel *channelLabels = malloc(sizeof(AudioChannelLabel) * count);
-    if (!channelLabels)
+    if (!channelLabels) {
         return nil;
+    }
 
-    for (AVAudioChannelCount i = 0; i < count; ++i)
+    for (AVAudioChannelCount i = 0; i < count; ++i) {
         channelLabels[i] = va_arg(ap, AudioChannelLabel);
+    }
 
     self = [self initWithChannelLabels:channelLabels count:count];
     free(channelLabels);
@@ -122,24 +126,27 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     NSParameterAssert(count > 0);
 
     AudioChannelLayout *channelLayout = CreateChannelLayout(count);
-    if (!channelLayout)
+    if (!channelLayout) {
         return nil;
+    }
 
     channelLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
     channelLayout->mNumberChannelDescriptions = count;
 
-    for (AVAudioChannelCount i = 0; i < count; ++i)
+    for (AVAudioChannelCount i = 0; i < count; ++i) {
         channelLayout->mChannelDescriptions[i].mChannelLabel = channelLabels[i];
+    }
 
     // Attempt to convert the channel labels to a layout tag
     AudioChannelLayoutTag tag;
     UInt32 dataSize = sizeof(tag);
     OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout,
                                              (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
-    if (result == noErr)
+    if (result == noErr) {
         self = [self initWithLayoutTag:tag];
-    else
+    } else {
         self = [self initWithLayout:channelLayout];
+    }
 
     free(channelLayout);
 
@@ -154,11 +161,13 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     NSUInteger count = channelLabelArray.count;
 
     AudioChannelLabel *channelLabels = malloc(sizeof(AudioChannelLabel) * count);
-    if (!channelLabels)
+    if (!channelLabels) {
         return nil;
+    }
 
-    for (NSUInteger i = 0; i < count; ++i)
+    for (NSUInteger i = 0; i < count; ++i) {
         channelLabels[i] = ChannelLabelForString([channelLabelArray objectAtIndex:i]);
+    }
 
     self = [self initWithChannelLabels:channelLabels count:(AVAudioChannelCount)count];
     free(channelLabels);

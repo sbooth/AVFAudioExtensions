@@ -17,8 +17,9 @@
 }
 
 - (AVAudioFrameCount)prependFromBuffer:(AVAudioPCMBuffer *)buffer readingFromOffset:(AVAudioFrameCount)offset {
-    if (offset > buffer.frameLength)
+    if (offset > buffer.frameLength) {
         return 0;
+    }
     return [self insertFromBuffer:buffer readingFromOffset:offset frameLength:(buffer.frameLength - offset) atOffset:0];
 }
 
@@ -33,8 +34,9 @@
 }
 
 - (AVAudioFrameCount)appendFromBuffer:(AVAudioPCMBuffer *)buffer readingFromOffset:(AVAudioFrameCount)offset {
-    if (offset > buffer.frameLength)
+    if (offset > buffer.frameLength) {
         return 0;
+    }
     return [self insertFromBuffer:buffer
                 readingFromOffset:offset
                       frameLength:(buffer.frameLength - offset)
@@ -59,8 +61,9 @@
     NSParameterAssert([self.format isEqual:buffer.format]);
 
     if (readOffset > buffer.frameLength || writeOffset > self.frameLength || frameLength == 0 ||
-        buffer.frameLength == 0)
+        buffer.frameLength == 0) {
         return 0;
+    }
 
     AVAudioFrameCount framesToInsert =
           MIN(self.frameCapacity - self.frameLength, MIN(frameLength, buffer.frameLength - readOffset));
@@ -72,17 +75,19 @@
     AVAudioFrameCount framesToMove = self.frameLength - writeOffset;
     if (framesToMove) {
         AVAudioFrameCount moveToOffset = writeOffset + framesToInsert;
-        for (UInt32 i = 0; i < dst_abl->mNumberBuffers; ++i)
+        for (UInt32 i = 0; i < dst_abl->mNumberBuffers; ++i) {
             memmove((unsigned char *)dst_abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame),
                     (const unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
+        }
     }
 
     if (framesToInsert) {
-        for (UInt32 i = 0; i < src_abl->mNumberBuffers; ++i)
+        for (UInt32 i = 0; i < src_abl->mNumberBuffers; ++i) {
             memcpy((unsigned char *)dst_abl->mBuffers[i].mData + (writeOffset * asbd->mBytesPerFrame),
                    (const unsigned char *)src_abl->mBuffers[i].mData + (readOffset * asbd->mBytesPerFrame),
                    framesToInsert * asbd->mBytesPerFrame);
+        }
 
         self.frameLength += framesToInsert;
     }
@@ -101,8 +106,9 @@
 }
 
 - (AVAudioFrameCount)trimAtOffset:(AVAudioFrameCount)offset frameLength:(AVAudioFrameCount)frameLength {
-    if (offset > self.frameLength || frameLength == 0)
+    if (offset > self.frameLength || frameLength == 0) {
         return 0;
+    }
 
     AVAudioFrameCount framesToTrim = MIN(frameLength, self.frameLength - offset);
 
@@ -112,10 +118,11 @@
     AVAudioFrameCount framesToMove = self.frameLength - (offset + framesToTrim);
     if (framesToMove) {
         AVAudioFrameCount moveFromOffset = offset + framesToTrim;
-        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
             memmove((unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame),
                     (const unsigned char *)abl->mBuffers[i].mData + (moveFromOffset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
+        }
     }
 
     self.frameLength -= framesToTrim;
@@ -132,8 +139,9 @@
 }
 
 - (AVAudioFrameCount)insertSilenceAtOffset:(AVAudioFrameCount)offset frameLength:(AVAudioFrameCount)frameLength {
-    if (offset > self.frameLength || frameLength == 0)
+    if (offset > self.frameLength || frameLength == 0) {
         return 0;
+    }
 
     AVAudioFrameCount framesToZero = MIN(self.frameCapacity - self.frameLength, frameLength);
 
@@ -148,16 +156,18 @@
     AVAudioFrameCount framesToMove = self.frameLength - offset;
     if (framesToMove) {
         AVAudioFrameCount moveToOffset = offset + framesToZero;
-        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
             memmove((unsigned char *)abl->mBuffers[i].mData + (moveToOffset * asbd->mBytesPerFrame),
                     (const unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame),
                     framesToMove * asbd->mBytesPerFrame);
+        }
     }
 
     if (framesToZero) {
-        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i)
+        for (UInt32 i = 0; i < abl->mNumberBuffers; ++i) {
             memset((unsigned char *)abl->mBuffers[i].mData + (offset * asbd->mBytesPerFrame), 0,
                    framesToZero * asbd->mBytesPerFrame);
+        }
 
         self.frameLength += framesToZero;
     }
@@ -174,8 +184,9 @@
 }
 
 - (BOOL)isDigitalSilence {
-    if (self.frameLength == 0)
+    if (self.frameLength == 0) {
         return YES;
+    }
 
     const AudioStreamBasicDescription *asbd = self.format.streamDescription;
     const AudioBufferList *abl = self.audioBufferList;
@@ -189,8 +200,9 @@
                 const float *buf = (const float *)abl->mBuffers[i].mData;
                 for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(float);
                      ++sampleNumber) {
-                    if (buf[sampleNumber] != 0)
+                    if (buf[sampleNumber] != 0) {
                         return NO;
+                    }
                 }
             }
             return YES;
@@ -200,8 +212,9 @@
                 const double *buf = (const double *)abl->mBuffers[i].mData;
                 for (UInt32 sampleNumber = 0; sampleNumber < abl->mBuffers[i].mDataByteSize / sizeof(double);
                      ++sampleNumber) {
-                    if (buf[sampleNumber] != 0)
+                    if (buf[sampleNumber] != 0) {
                         return NO;
+                    }
                 }
             }
             return YES;
@@ -225,8 +238,9 @@
                     const uint8_t *buf = (const uint8_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -238,8 +252,9 @@
                     const uint16_t *buf = (const uint16_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -261,8 +276,9 @@
                             sample |= (*buf++ << 8) & 0xff00;
                             sample |= (*buf++ << 16) & 0xff0000;
                         }
-                        if (sample != silence)
+                        if (sample != silence) {
                             return NO;
+                        }
                     }
                 }
                 return YES;
@@ -273,8 +289,9 @@
                     const uint32_t *buf = (const uint32_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -286,8 +303,9 @@
                     const uint64_t *buf = (const uint64_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -308,8 +326,9 @@
                     const uint8_t *buf = (const uint8_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -325,8 +344,9 @@
                     const uint16_t *buf = (const uint16_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -352,8 +372,9 @@
                             sample |= (*buf++ << 8) & 0xff00;
                             sample |= (*buf++ << 16) & 0xff0000;
                         }
-                        if (sample != silence)
+                        if (sample != silence) {
                             return NO;
+                        }
                     }
                 }
                 return YES;
@@ -368,8 +389,9 @@
                     const uint32_t *buf = (const uint32_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
@@ -385,8 +407,9 @@
                     const uint64_t *buf = (const uint64_t *)abl->mBuffers[i].mData;
                     size_t sampleCount = abl->mBuffers[i].mDataByteSize / bytesPerSample;
                     while (sampleCount--) {
-                        if (*buf != silence)
+                        if (*buf != silence) {
                             return NO;
+                        }
                         ++buf;
                     }
                 }
