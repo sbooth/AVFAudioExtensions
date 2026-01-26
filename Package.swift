@@ -20,9 +20,6 @@ let package = Package(
     targets: [
         .target(
             name: "AVFAudioExtensions",
-            cSettings: [
-                .headerSearchPath("include/AVFAudioExtensions"),
-            ],
             linkerSettings: [
                 .linkedFramework("AVFAudio"),
             ]),

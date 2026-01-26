@@ -5,7 +5,7 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-#import "AVAudioFormat+SFBFormatTransformation.h"
+#import "AVFAudioExtensions/AVAudioFormat+SFBFormatTransformation.h"
 
 @implementation AVAudioFormat (SFBFormatTransformation)
 
