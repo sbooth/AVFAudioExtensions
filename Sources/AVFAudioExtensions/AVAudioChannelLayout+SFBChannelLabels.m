@@ -5,7 +5,7 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-#import "AVAudioChannelLayout+SFBChannelLabels.h"
+#import "AVFAudioExtensions/AVAudioChannelLayout+SFBChannelLabels.h"
 
 #import <AudioToolbox/AudioFormat.h>
 
