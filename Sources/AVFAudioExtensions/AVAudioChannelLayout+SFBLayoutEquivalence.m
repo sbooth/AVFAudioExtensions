@@ -5,9 +5,9 @@
 // Part of https://github.com/sbooth/AVFAudioExtensions
 //
 
-#import "AVAudioChannelLayout+SFBLayoutEquivalence.h"
+#import "AVFAudioExtensions/AVAudioChannelLayout+SFBLayoutEquivalence.h"
 
-@import AudioToolbox.AudioFormat;
+#import <AudioToolbox/AudioFormat.h>
 
 @implementation AVAudioChannelLayout (SFBLayoutEquivalence)
 
