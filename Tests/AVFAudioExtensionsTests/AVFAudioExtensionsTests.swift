@@ -49,6 +49,20 @@ final class AVFAudioExtensionsTests: XCTestCase {
         XCTAssertFalse(stereo!.isEquivalent(to: mono))
         XCTAssertFalse(mono!.isEquivalent(to: stereo))
 
+        let stereoLabels = AVAudioChannelLayout(channelLabelString: "L R")
+        XCTAssertTrue(stereoLabels!.isEquivalent(to: nil))
+        XCTAssertTrue(stereoLabels!.isEquivalent(to: stereo))
+
+        var acl = AudioChannelLayout(
+            mChannelLayoutTag: kAudioChannelLayoutTag_UseChannelBitmap,
+            mChannelBitmap: .init(rawValue: AudioChannelBitmap.bit_Left.rawValue | AudioChannelBitmap.bit_Right.rawValue),
+            mNumberChannelDescriptions: 0,
+            mChannelDescriptions: AudioChannelDescription())
+        let stereoBitmap = AVAudioChannelLayout(layout: &acl)
+        XCTAssertFalse(stereoBitmap.isEquivalent(to: nil)) // no layout tag
+        XCTAssertTrue(stereoBitmap.isEquivalent(to: stereo))
+        XCTAssertTrue(stereoBitmap.isEquivalent(to: stereoLabels))
+
         let three = AVAudioChannelLayout(layoutTag: kAudioChannelLayoutTag_Unknown | 3)
         XCTAssertFalse(three!.isEquivalent(to: nil))
         XCTAssertFalse(mono!.isEquivalent(to: three!))
