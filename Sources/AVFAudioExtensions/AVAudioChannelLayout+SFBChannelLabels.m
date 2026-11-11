@@ -140,9 +140,9 @@ static AudioChannelLabel ChannelLabelForString(NSString *s) {
     // Attempt to convert the channel labels to a layout tag
     AudioChannelLayoutTag tag;
     UInt32 dataSize = sizeof(tag);
-    OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout,
+    OSStatus status = AudioFormatGetProperty(kAudioFormatProperty_TagForChannelLayout,
                                              (UInt32)GetChannelLayoutSize(count), channelLayout, &dataSize, &tag);
-    if (result == noErr) {
+    if (status == noErr) {
         self = [self initWithLayoutTag:tag];
     } else {
         self = [self initWithLayout:channelLayout];
