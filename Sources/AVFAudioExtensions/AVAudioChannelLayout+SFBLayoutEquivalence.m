@@ -21,9 +21,9 @@
 
     UInt32 layoutsEqual = 0;
     UInt32 propertySize = sizeof(layoutsEqual);
-    OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_AreChannelLayoutsEquivalent, sizeof(layouts), layouts,
+    OSStatus status = AudioFormatGetProperty(kAudioFormatProperty_AreChannelLayoutsEquivalent, sizeof(layouts), layouts,
                                              &propertySize, &layoutsEqual);
-    if (result != noErr) {
+    if (status != noErr) {
         return NO;
     }
 
