@@ -37,4 +37,21 @@ final class AVFAudioExtensionsTests: XCTestCase {
         XCTAssertNotNil(format)
         XCTAssertGreaterThan(format!.formatName.count, 0)
     }
+
+    func testChannelLayoutEquivalence() {
+        let mono = AVAudioChannelLayout(layoutTag: kAudioChannelLayoutTag_Mono)
+        XCTAssertTrue(mono!.isEquivalent(to: nil))
+        XCTAssertTrue(mono!.isEquivalent(to: mono!))
+        let stereo = AVAudioChannelLayout(layoutTag: kAudioChannelLayoutTag_Stereo)
+        XCTAssertTrue(stereo!.isEquivalent(to: nil))
+        XCTAssertTrue(stereo!.isEquivalent(to: stereo!))
+
+        XCTAssertFalse(stereo!.isEquivalent(to: mono))
+        XCTAssertFalse(mono!.isEquivalent(to: stereo))
+
+        let three = AVAudioChannelLayout(layoutTag: kAudioChannelLayoutTag_Unknown | 3)
+        XCTAssertFalse(three!.isEquivalent(to: nil))
+        XCTAssertFalse(mono!.isEquivalent(to: three!))
+        XCTAssertFalse(stereo!.isEquivalent(to: three!))
+    }
 }
